@@ -10,7 +10,7 @@ def topKFrequent(nums, k):
             dict[num] += 1
         else:
             dict.update({num: 1})
-    my_array = list(dict.values())
+    my_array = list(dict.keys())
     my_array.sort()
     result = []
     i = 0
