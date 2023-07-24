@@ -4,8 +4,6 @@ def topKFrequent(nums, k):
     dict = {}
     iterable_nums = tuple(nums)
     for num in iterable_nums:
-        # if number exists in dictionary, increase value by 1
-        # if number does not exist in dictionary, create it as a new key and set value to 1
         if dict.get(num):
             dict[num] += 1
         else:
@@ -20,7 +18,7 @@ def topKFrequent(nums, k):
         list(to_add)
         result.append(to_add[0])
         i += 1
-    return result
+    return result  
 
 nums = [4,1,-1,2,-1,2,3]
 k = 2
