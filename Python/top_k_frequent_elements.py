@@ -10,17 +10,19 @@ def topKFrequent(nums, k):
             dict[num] += 1
         else:
             dict.update({num: 1})
-    my_array = list(dict.keys())
-    my_array.sort()
+    x = dict.items()
+    x_list = list(x)
+    sorted_x_list = sorted(x_list, key=lambda x:x[1], reverse=True)
     result = []
     i = 0
-    while(i<k):
-        result.append(my_array[0])
-        my_array.pop(0)
+    while i < k:
+        to_add = sorted_x_list.pop(0)
+        list(to_add)
+        result.append(to_add[0])
         i += 1
     return result
 
-nums = [-1, -1]
-k = 1
+nums = [4,1,-1,2,-1,2,3]
+k = 2
 
 print(topKFrequent(nums, k))
