@@ -33,26 +33,35 @@
 
 
 def is_valid_sudoku(board):
-    for row in board:
-        for spot in row:
-            nums_used = {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0,
-                5: 0,
-                6: 0,
-                7: 0,
-                8: 0,
-                9: 0,
-            }
-            num = row.pop()
+    editable_board = board.copy()
+    for row in editable_board:
+        nums_used = {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            ".": 0,
+        }
+        for num in row:
+            nums_used[num] += 1
+        del nums_used["."]
+        for num in nums_used:
+            if nums_used[num] == 0 or nums_used[num] == 1:
+                continue
+            else:
+                print("end: ", nums_used)
+                return False
 
-    pass
+    return True
 
 
 board = [
-    ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    ["5", "3", ".", ".", "7", ".", ".", "5", "."],
     ["6", ".", ".", "1", "9", "5", ".", ".", "."],
     [".", "9", "8", ".", ".", ".", ".", "6", "."],
     ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
@@ -63,4 +72,4 @@ board = [
     [".", ".", ".", ".", "8", ".", ".", "7", "9"],
 ]
 
-is_valid_sudoku(board)
+print(is_valid_sudoku(board))
