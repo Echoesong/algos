@@ -35,7 +35,44 @@
 def is_valid_sudoku(board):
     editable_board = board.copy()
     columns = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: []}
-    for row in editable_board:
+    squares = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: []}
+    for i, row in enumerate(editable_board):
+        if i in [0, 1, 2]:
+            for i, num in enumerate(row):
+                if i in [0, 1, 2]:
+                    # add to 0
+                    squares[0].append(num)
+
+                if i in [3, 4, 5]:
+                    # add to 1
+                    squares[1].append(num)
+
+                if i in [6, 7, 8]:
+                    # add to 3
+                    squares[2].append(num)
+
+        if i in [3, 4, 5]:
+            for i, num in enumerate(row):
+                if i in [0, 1, 2]:
+                    squares[3].append(num)
+
+                if i in [3, 4, 5]:
+                    squares[4].append(num)
+
+                if i in [6, 7, 8]:
+                    squares[5].append(num)
+
+        if i in [6, 7, 8]:
+            for i, num in enumerate(row):
+                if i in [0, 1, 2]:
+                    squares[6].append(num)
+
+                if i in [3, 4, 5]:
+                    squares[7].append(num)
+
+                if i in [6, 7, 8]:
+                    squares[8].append(num)
+
         nums_used = {
             "1": 0,
             "2": 0,
@@ -51,6 +88,7 @@ def is_valid_sudoku(board):
         for i, num in enumerate(row):
             nums_used[num] += 1
             columns[i].append(num)
+
         del nums_used["."]
         for num in nums_used:
             if nums_used[num] == 0 or nums_used[num] == 1:
@@ -80,7 +118,7 @@ def is_valid_sudoku(board):
             else:
                 print("columns: ", nums_used)
                 return False
-
+    print(squares)
     return True
 
 
@@ -91,7 +129,7 @@ board = [
     ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
     ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
     ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-    ["7", "6", ".", ".", ".", ".", "2", "8", "."],
+    [".", "6", ".", ".", ".", ".", "2", "8", "."],
     [".", ".", ".", "4", "1", "9", ".", ".", "5"],
     [".", ".", ".", ".", "8", ".", ".", "7", "9"],
 ]
