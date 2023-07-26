@@ -17,3 +17,6 @@ def is_palindrome(str):
 
 
 print(is_palindrome("0P"))
+
+# T EFFICIENCY: O(n)
+# S EFFICIENCY: O(n)

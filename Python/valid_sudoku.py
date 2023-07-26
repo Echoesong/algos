@@ -38,39 +38,39 @@ def is_valid_sudoku(board):
     squares = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: []}
     for i, row in enumerate(editable_board):
         if i in [0, 1, 2]:
-            for i, num in enumerate(row):
-                if i in [0, 1, 2]:
+            for j, num in enumerate(row):
+                if j in [0, 1, 2]:
                     # add to 0
                     squares[0].append(num)
 
-                if i in [3, 4, 5]:
+                if j in [3, 4, 5]:
                     # add to 1
                     squares[1].append(num)
 
-                if i in [6, 7, 8]:
-                    # add to 3
+                if j in [6, 7, 8]:
+                    # add to 2
                     squares[2].append(num)
 
         if i in [3, 4, 5]:
-            for i, num in enumerate(row):
-                if i in [0, 1, 2]:
+            for j, num in enumerate(row):
+                if j in [0, 1, 2]:
                     squares[3].append(num)
 
-                if i in [3, 4, 5]:
+                if j in [3, 4, 5]:
                     squares[4].append(num)
 
-                if i in [6, 7, 8]:
+                if j in [6, 7, 8]:
                     squares[5].append(num)
 
         if i in [6, 7, 8]:
-            for i, num in enumerate(row):
-                if i in [0, 1, 2]:
+            for j, num in enumerate(row):
+                if j in [0, 1, 2]:
                     squares[6].append(num)
 
-                if i in [3, 4, 5]:
+                if j in [3, 4, 5]:
                     squares[7].append(num)
 
-                if i in [6, 7, 8]:
+                if j in [6, 7, 8]:
                     squares[8].append(num)
 
         nums_used = {
@@ -118,7 +118,28 @@ def is_valid_sudoku(board):
             else:
                 print("columns: ", nums_used)
                 return False
-    print(squares)
+    for square in squares.values():
+        nums_used = {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            ".": 0,
+        }
+        for num in square:
+            nums_used[num] += 1
+        del nums_used["."]
+        for num in nums_used:
+            if nums_used[num] == 0 or nums_used[num] == 1:
+                continue
+            else:
+                print("squares: ", nums_used)
+                return False
     return True
 
 
