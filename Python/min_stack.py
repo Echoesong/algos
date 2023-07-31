@@ -7,48 +7,50 @@
 class MinStack(object):
     def __init__(self):
         self.stack = []
-        self.lowest = None
-        self.next_lowest = None
+        self.min_stack = []
 
     def push(self, val):
         """
         :type val: int
         :rtype: None
         """
-        # Add the value to self
         self.stack.append(val)
-        if val <= self.lowest:
-            self.next_lowest = self.lowest
-            self.lowest = val
+        if len(self.min_stack) == 0:
+            self.min_stack.append(val)
+        else:
+            min = (
+                self.stack[-1]
+                if self.stack[-1] < self.min_stack[-1]
+                else self.min_stack[-1]
+            )
+            self.min_stack.append(min)
 
     def pop(self):
         """
         :rtype: None
         """
-        # Remove the last value from self
-        if self.stack[-1] == self.lowest:
-            self.lowest = self.next_lowest
-            self.next_lowest = None
         self.stack.pop()
+        self.min_stack.pop()
 
     def top(self):
         """
         :rtype: int
         """
-        # Return the last value from self, do not remove it
         return self.stack[-1]
 
     def getMin(self):
         """
         :rtype: int
         """
-        # Return lowest value element in self
-        return self.lowest
+        return self.min_stack[-1]
 
 
 # Your MinStack object will be instantiated and called as such:
-# obj = MinStack()
-# obj.push(val)
-# obj.pop()
-# param_3 = obj.top()
-# param_4 = obj.getMin()
+minStack = MinStack()
+minStack.push(-2)
+minStack.push(0)
+minStack.push(-3)
+minStack.getMin()
+minStack.pop()
+minStack.top()
+minStack.getMin()
