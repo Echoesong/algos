@@ -14,7 +14,7 @@ def groupAnagram(strs):
     for word in strs:
         myDict[word] = 0
     for word in myDict:
-        print(myDict[word])
+        word.
     pass
 
 
