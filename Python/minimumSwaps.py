@@ -10,13 +10,16 @@ def minimumSwaps(arr):
         if num == i + 1:
             continue
         else:
-            for j in range(len(arr) - i):
+            for j in range(i + 1, len(arr)):
                 if arr[j] == i + 1:
                     arr[i], arr[j] = arr[j], arr[i]
                     swaps += 1
-                    print(arr)
+                    print("arr at end of loop: ", arr)
+    return swaps
 
 
+arr0 = [1, 2, 3, 4]
 arr1 = [4, 3, 1, 2]
 arr2 = [7, 1, 3, 2, 4, 5, 6]  # Expected output: 5
-print(minimumSwaps(arr1))
+arr3 = [1, 3, 5, 2, 4, 6, 7]  # Expected output: 3
+print(minimumSwaps(arr3))
