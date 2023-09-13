@@ -11,16 +11,16 @@
 def minimumSwaps(arr):
     swaps = 0
     dictionary = {}
-
     for i, num in enumerate(arr):
-        dictionary.update({i: num - 1})
-    print(dictionary)
-    for key in list(dictionary.keys()):
-        while not dictionary[key] == key:
-            cache = dictionary[key]
-            dictionary[key], dictionary[cache] = dictionary[cache], dictionary[key]
-        swaps += 1
-
+        dictionary.update({i: num})
+    for i, num in enumerate(arr):
+        while not num == i + 1:
+            swapIndex = num - 1
+            valAtIndex = num
+            valAtSwapIndex = arr[swapIndex]
+            num = valAtSwapIndex
+            arr[swapIndex] = valAtIndex
+            swaps += 1
     return swaps
 
 
@@ -28,4 +28,4 @@ arr0 = [1, 2, 3, 4]
 arr1 = [4, 3, 1, 2]
 arr2 = [7, 1, 3, 2, 4, 5, 6]  # Expected output: 5
 arr3 = [1, 3, 5, 2, 4, 6, 7]  # Expected output: 3
-print(minimumSwaps(arr2))
+print(minimumSwaps(arr3))
