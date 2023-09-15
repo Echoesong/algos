@@ -20,7 +20,7 @@ def checkMagazine(magazine, note):
     noteDict = {}
     output = "Yes"
     for word in magazine:
-        if word in magazineDict.values():
+        if word in magazineDict.keys():
             magazineDict[word] += 1
         else:
             magazineDict.update({word: 1})
@@ -29,17 +29,13 @@ def checkMagazine(magazine, note):
             noteDict[word] += 1
         else:
             noteDict.update({word: 1})
-    print(magazineDict, noteDict)
+    print(noteDict, magazineDict)
     for word in noteDict:
-        if word in magazineDict:
-            if magazineDict[word] >= noteDict[word]:
-                magazineDict[word] -= 1
-                noteDict[word] -= 1
-                continue
-            else:
-                output = "No"
+        if word in magazineDict.keys() and magazineDict[word] >= noteDict[word]:
+            continue
         else:
             output = "No"
+            break
     print(output)
 
 
