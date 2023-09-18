@@ -1,22 +1,19 @@
 def sherlockAndAnagrams(s):
     dict = {}
     count = 0
-    for char in s:
-        if char in dict:
-            dict[char] += 1
-        else:
-            dict.update({char: 1})
-
-    while any(value > 0 for value in dict.values()):
-        stringArr = []
-        for char in dict:
-            stringArr.extend(char * dict[char])
-            comparisonDict = {}
-            if stringArr == stringArr.reverse():
-                count += 1
-            if dict[char] > 0:
-                dict[char] -= 1
-        print(dict.values())
+    for i, char in enumerate(s):
+        j = i + 1
+        while j <= len(s) - i:
+            subString = s[i, j]
+            subString.sort()
+            if dict[subString] == 0:
+                dict[subString] = 1
+            else:
+                dict[subString] += 1
+            j += 1
+    for key, val in dict.items():
+        if val > 1:
+            count += val * val(-1) / 2
     return count
 
 
