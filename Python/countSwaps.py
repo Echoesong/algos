@@ -1,16 +1,22 @@
-def countSwaps(a):
-    count = 0
-    for i, num in enumerate(a):
-        j = i + 1
-        if j < len(a):
-            while a[i] > a[j]:
-                if num > a[j]:
-                    a[i], a[j] = a[j], a[i]
-                    count += 1
-                else:
-                    continue
-    print(count)
+def countSwaps(a, count=0):
+    if sorted(a) == a:
+        print(f"Array is sorted in {count} swaps.")
+        print(f"First Element: {a[0]}")
+        print(f"Last Element: {a[-1]}")
+        return
+    for i in range(0, len(a)):
+        x = i
+        j = x + 1
+        num = a[i]
+        while j < len(a) and num > a[j]:
+            a[x], a[j] = a[j], a[x]
+            count += 1
+            j += 1
+            x += 1
+    countSwaps(a, count)
 
 
-a = [3, 2, 1]
+a = [4, 2, 3, 1]
+
+
 countSwaps(a)
