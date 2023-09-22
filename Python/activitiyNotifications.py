@@ -22,7 +22,7 @@ def activityNotifications(expenditure, d):
                 notifications += 1
             # Below section 'resets' the cache to it's unsorted value--
             # Sets up cache for next iteration
-            cacheForMedian.remove(cacheForMedian[indexToRemove])
+            cacheForMedian.remove(expenditure[indexToRemove])
             bisect.insort(cacheForMedian, num)
 
         else:
