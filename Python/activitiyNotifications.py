@@ -1,21 +1,29 @@
+# Possible route to get around timeout issues: Only sort cacheForMedian once when it is the proper length, then after that add the elements in a sorted manner
+
+import bisect
+
+
 def activityNotifications(expenditure, d):
     cacheForMedian = []
-    median = 0
     notifications = 0
+    sorted = False
     for i, num in enumerate(expenditure):
         n = len(cacheForMedian)
+        if n == d and sorted == False:
+            cacheForMedian.sort()
+            sorted = True
         if n == d:
-            cacheToManipulate = cacheForMedian.copy()
-            cacheToManipulate.sort()
+            indexToRemove = i - d
             if n % 2 == 0:
-                median = (cacheToManipulate[n // 2 - 1] + cacheToManipulate[n // 2]) / 2
+                median = (cacheForMedian[n // 2 - 1] + cacheForMedian[n // 2]) / 2
             else:
-                median = cacheToManipulate[n // 2]
-            # Below sets up for next iteration, removing index 0 and appending new value
+                median = cacheForMedian[n // 2]
             if num >= median * 2:
                 notifications += 1
-            cacheForMedian.pop(0)
-            cacheForMedian.append(cacheForMedian[min(i + 1, len(cacheForMedian) - 1)])
+            # Below section 'resets' the cache to it's unsorted value--
+            # Sets up cache for next iteration
+            cacheForMedian.remove(cacheForMedian[indexToRemove])
+            bisect.insort(cacheForMedian, num)
 
         else:
             cacheForMedian.append(num)
@@ -25,7 +33,7 @@ def activityNotifications(expenditure, d):
 
 # I think the above returns properly, but it's very inefficient and times out
 
-expenditure = [2, 3, 4, 2, 3, 6, 8, 4]
-d = 5
+expenditure = [10, 20, 30, 40, 50]
+d = 3
 
 print(activityNotifications(expenditure, d))
