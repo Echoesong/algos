@@ -9,22 +9,28 @@ def activityNotifications(expenditure, d):
     sorted = False
     for i, num in enumerate(expenditure):
         n = len(cacheForMedian)
+        # if cacheForMedian is as long as the # of days, and it's not sorted, sort it, and update sorted to True. This is just a check to kickstart the sorting of cacheForMedian
         if n == d and sorted == False:
             cacheForMedian.sort()
             sorted = True
+        # if cacheForMedian is as long as the # of days,
         if n == d:
-            indexToRemove = i - d
+            # if length of cacheForMedian is even, it equals the if statement; if odd, equals the else statement
             if n % 2 == 0:
                 median = (cacheForMedian[n // 2 - 1] + cacheForMedian[n // 2]) / 2
             else:
                 median = cacheForMedian[n // 2]
+            # if number is greater than or equal to twice the median, it gets 'flagged' and notifications increase by 1
             if num >= median * 2:
                 notifications += 1
-            # Below section 'resets' the cache to it's unsorted value--
-            # Sets up cache for next iteration
+            # indexToRemove is the oldest/stalest entry in cacheForMedian, calculated by current index minus # of days
+            indexToRemove = i - d
+            # Remove the first value in cacheForMedian equal to the expenditure[indexToRemove] value
             cacheForMedian.remove(expenditure[indexToRemove])
+            # Insert the current num in proper median order0
             bisect.insort(cacheForMedian, num)
 
+        # If cacheForMedian isn't long enough yet, append the current num
         else:
             cacheForMedian.append(num)
 

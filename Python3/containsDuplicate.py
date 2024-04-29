@@ -1,13 +1,8 @@
-def containsDuplicates(nums):
+def containsDuplicates(self, nums):
     mySet = set()
     for num in nums:
-        print(num)
-        if num in mySet:
-            return True
         mySet.add(num)
-    else:
+    if len(mySet) == len(nums):
         return True
-
-
-nums = [1, 2, 3, 1]
-print(containsDuplicates(nums))
+    else:
+        return False

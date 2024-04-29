@@ -1,15 +1,11 @@
 def rotLeft(a, d):
-    indices = []
-    output = []
-    for i, number in enumerate(range(1, a + 1)):
-        output.append(number)
-        j = i - d
-        indices.append(j)
-    output2 = output.copy()
-    for i, number in enumerate(output):
-        output2[indices[i]] = number
+    n = len(a)
+    output = [0] * n
+    for i, number in enumerate(a):
+        newIndex = i - d
+        output[newIndex] = number
 
-    return output2
+    return output
 
 
 a = 5
