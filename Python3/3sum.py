@@ -2,34 +2,40 @@
 
 
 def threeSum(numbers):
-    dict = {}
-    for i, num in enumerate(numbers):
-        dict.update({i: num})
-    leftIndex = 0
-    rightIndex = len(numbers) - 1
-    numbersLength = len(numbers) - 1
-    sum = numbers[leftIndex] + numbers[rightIndex]
-    target = 0 - sum
     output = []
-    while not rightIndex == numbersLength:
-        print(
-            "left index and value: ",
-            leftIndex,
-            dict[leftIndex],
-            "\nright index and value: ",
-            rightIndex,
-            dict[rightIndex],
-            "\nsum: ",
-            sum,
-            "\ntarget: ",
-            target,
-            "\noutput: ",
-            output,
-        )
-        if target in dict.values():
-            output.append([dict[leftIndex], dict[rightIndex], target])
-        leftIndex += 1
-        rightIndex += 1
+    numbers.sort()
+    anchorIndex = 0
+    leftIndex = anchorIndex + 1
+    rightIndex = len(numbers) - 1
+    while anchorIndex <= len(numbers) - 3:
+        target = numbers[anchorIndex] * -1
+        sum = numbers[leftIndex] + numbers[rightIndex]
+        if rightIndex <= leftIndex:
+            # reset
+            anchorIndex += 1
+            if numbers[anchorIndex] == numbers[anchorIndex - 1]:
+                continue
+            leftIndex = anchorIndex + 1
+            rightIndex = len(numbers) - 1
+            target = numbers[anchorIndex] * -1
+            sum = numbers[leftIndex] + numbers[rightIndex]
+        print(f"target: {target}, sum: {sum}")
+        print(f"output: {output}")
+        print(f"anchorIndex: {anchorIndex}")
+        if sum == target:
+            output.append(
+                [
+                    numbers[anchorIndex],
+                    numbers[leftIndex],
+                    numbers[rightIndex],
+                ]
+            )
+            anchorIndex += 1
+        elif sum > target:
+            rightIndex -= 1
+        elif sum < target:
+            leftIndex += 1
+
     return output
 
 
